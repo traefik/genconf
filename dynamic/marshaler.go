@@ -2,6 +2,14 @@ package dynamic
 
 import "encoding/json"
 
-func (c Configuration) MarshalJSON() ([]byte, error) {
-	return json.Marshal(c)
+type JSONPayload struct {
+	*Configuration
+}
+
+func (c JSONPayload) MarshalJSON() ([]byte, error) {
+	if c.Configuration == nil {
+		return nil, nil
+	}
+
+	return json.Marshal(c.Configuration)
 }
