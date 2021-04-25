@@ -96,6 +96,7 @@ type ServersTransport struct {
 	Certificates        tls.Certificates    `json:"certificates,omitempty"`
 	MaxIdleConnsPerHost int                 `json:"maxIdleConnsPerHost,omitempty"`
 	ForwardingTimeouts  *ForwardingTimeouts `json:"forwardingTimeouts,omitempty"`
+	DisableHTTP2        bool                `json:"disableHTTP2,omitempty"`
 }
 
 type Service struct {
