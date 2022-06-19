@@ -31,11 +31,15 @@ type Chain struct {
 }
 
 type CircuitBreaker struct {
-	Expression string `json:"expression,omitempty"`
+	Expression       string `json:"expression,omitempty"`
+	CheckPeriod      string `json:"checkPeriod,omitempty"`
+	FallbackDuration string `json:"fallbackDuration,omitempty"`
+	RecoveryDuration string `json:"recoveryDuration,omitempty"`
 }
 
 type Compress struct {
 	ExcludedContentTypes []string `json:"excludedContentTypes,omitempty"`
+	MinResponseBodyBytes int      `json:"minResponseBodyBytes,omitempty"`
 }
 
 type ContentType struct {
@@ -194,7 +198,16 @@ type StripPrefixRegex struct {
 	Regex []string `json:"regex,omitempty"`
 }
 
-type TLSClientCertificateDNInfo struct {
+type TLSClientCertificateInfo struct {
+	NotAfter     bool                               `json:"notAfter,omitempty"`
+	NotBefore    bool                               `json:"notBefore,omitempty"`
+	Sans         bool                               `json:"sans,omitempty"`
+	Subject      *TLSClientCertificateSubjectDNInfo `json:"subject,omitempty"`
+	Issuer       *TLSClientCertificateIssuerDNInfo  `json:"issuer,omitempty"`
+	SerialNumber bool                               `json:"serialNumber,omitempty"`
+}
+
+type TLSClientCertificateIssuerDNInfo struct {
 	Country         bool `json:"country,omitempty"`
 	Province        bool `json:"province,omitempty"`
 	Locality        bool `json:"locality,omitempty"`
@@ -204,13 +217,15 @@ type TLSClientCertificateDNInfo struct {
 	DomainComponent bool `json:"domainComponent,omitempty"`
 }
 
-type TLSClientCertificateInfo struct {
-	NotAfter     bool                        `json:"notAfter,omitempty"`
-	NotBefore    bool                        `json:"notBefore,omitempty"`
-	Sans         bool                        `json:"sans,omitempty"`
-	Subject      *TLSClientCertificateDNInfo `json:"subject,omitempty"`
-	Issuer       *TLSClientCertificateDNInfo `json:"issuer,omitempty"`
-	SerialNumber bool                        `json:"serialNumber,omitempty"`
+type TLSClientCertificateSubjectDNInfo struct {
+	Country            bool `json:"country,omitempty"`
+	Province           bool `json:"province,omitempty"`
+	Locality           bool `json:"locality,omitempty"`
+	Organization       bool `json:"organization,omitempty"`
+	OrganizationalUnit bool `json:"organizationalUnit,omitempty"`
+	CommonName         bool `json:"commonName,omitempty"`
+	SerialNumber       bool `json:"serialNumber,omitempty"`
+	DomainComponent    bool `json:"domainComponent,omitempty"`
 }
 
 type Users []string
